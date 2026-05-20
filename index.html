@@ -20,20 +20,56 @@
 
     header { position: sticky; top: 0; z-index: 100; background: rgba(245,240,234,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
     .header-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
-    .logo { font-family: var(--serif); font-size: 1.1rem; color: var(--fg); text-decoration: none; }
+    .logo { font-family: var(--serif); font-size: 1.1rem; color: var(--fg); text-decoration: none; white-space: nowrap; flex-shrink: 0; }
     nav { display: flex; gap: 28px; align-items: center; }
     nav a { font-size: 0.875rem; color: var(--fg-muted); text-decoration: none; font-weight: 300; transition: color .2s; }
     nav a:hover { color: var(--fg); }
+
+    /* Hamburger tlačítko — skryté na desktopu */
+    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--fg); border-radius: 2px; transition: all .3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobilní navigace */
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      nav {
+        display: none;
+        position: absolute; top: 64px; left: 0; right: 0;
+        flex-direction: column; align-items: stretch; gap: 0;
+        background: rgba(245,240,234,0.98); backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        padding: 8px 0;
+      }
+      nav.open { display: flex; }
+      nav a { padding: 14px 24px; font-size: 1rem; border-bottom: 1px solid var(--border); }
+      nav a:last-child { border-bottom: none; }
+      .header-cta { display: none; }
+      section { padding: 56px 20px; }
+      .steps-grid { grid-template-columns: 1fr !important; gap: 32px; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr !important; }
+      .location-grid { grid-template-columns: 1fr; gap: 36px; }
+    }
+    /* Ceník — dlaždice pod sebou na užších obrazovkách */
+    @media (max-width: 700px) {
+      .pricing-grid { grid-template-columns: 1fr !important; }
+    }
     .btn { display: inline-block; padding: 10px 24px; border-radius: 100px; font-size: 0.875rem; font-family: var(--sans); font-weight: 400; text-decoration: none; cursor: pointer; transition: all .2s; border: none; }
     .btn-primary { background: var(--primary); color: #faf7f3; }
     .btn-primary:hover { background: var(--accent); }
     .btn-outline { background: transparent; border: 1px solid rgba(46,39,32,0.35); color: var(--fg); }
     .btn-outline:hover { border-color: var(--fg); }
     .btn-light { background: #faf7f3; color: var(--fg); }
+    .btn-light:hover { background: var(--bg-alt); }
     .btn-ghost-light { background: transparent; border: 1px solid rgba(250,247,243,0.4); color: #faf7f3; }
+    .btn-ghost-light:hover { background: rgba(250,247,243,0.12); border-color: rgba(250,247,243,0.7); }
+    .btn-outline:hover { border-color: var(--fg); background: rgba(46,39,32,0.06); }
 
-    #hero { position: relative; min-height: 90vh; display: flex; align-items: center; }
-    .hero-bg { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(46,39,32,0.55) 0%, rgba(46,39,32,0.15) 60%, transparent 100%), url('images/hero.png') center/cover no-repeat; }
+    #hero { position: relative; height: calc(100vh - 64px); display: flex; align-items: center; }
+    .hero-bg { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(46,39,32,0.82) 0%, rgba(46,39,32,0.55) 60%, rgba(46,39,32,0.25) 100%), url('images/hero.png') center/cover no-repeat; }
     .hero-content { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; padding: 80px 24px; }
     .eyebrow { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(250,247,243,0.7); margin-bottom: 16px; }
     h1 { font-family: var(--serif); font-size: clamp(2.6rem, 6vw, 4.5rem); font-weight: 400; line-height: 1.1; color: #faf7f3; margin-bottom: 20px; max-width: 560px; }
@@ -42,34 +78,36 @@
 
     section { padding: 88px 24px; }
     .container { max-width: 1100px; margin: 0 auto; }
-    .section-label { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--fg-muted); margin-bottom: 12px; font-weight: 400; }
+    .section-label { font-size: 0.85rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-muted); margin-bottom: 12px; font-weight: 400; }
     h2 { font-family: var(--serif); font-size: clamp(1.9rem, 4vw, 3.2rem); font-weight: 400; line-height: 1.15; color: var(--fg); margin-bottom: 20px; }
 
     #jak-to-funguje { background: var(--bg); }
-    .steps-header { text-align: center; margin-bottom: 60px; }
+    .steps-header { margin-bottom: 60px; }
     .steps-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 44px 60px; }
     .step { display: flex; gap: 20px; }
-    .step-num { font-family: var(--serif); font-size: 1.5rem; color: var(--border); flex-shrink: 0; line-height: 1; }
+    .step-num { font-family: var(--serif); font-size: 1.5rem; color: var(--fg-muted); flex-shrink: 0; line-height: 1; }
     .step h3 { font-size: 1rem; font-weight: 500; margin-bottom: 8px; }
     .step p { font-size: 0.88rem; color: var(--fg-muted); line-height: 1.7; font-weight: 300; }
 
     #cenik { background: var(--bg-alt); }
     .pricing-intro { margin-bottom: 48px; }
-    .pricing-intro p { color: var(--fg-muted); font-size: 0.9rem; font-weight: 300; margin-top: 8px; }
-    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 18px; }
+    .pricing-intro p:not(.section-label) { color: var(--fg-muted); font-size: 0.9rem; font-weight: 300; margin-top: 8px; }
+    .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
     .pricing-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px; }
     .pricing-card.featured { border-color: var(--accent); outline: 2px solid var(--accent); }
     .pricing-badge { display: inline-block; margin-top: 10px; background: var(--primary); color: #faf7f3; font-size: 0.68rem; letter-spacing: 0.08em; padding: 4px 12px; border-radius: 100px; text-transform: uppercase; }
     .pricing-badge.orange { background: #c4622a; }
-    .pricing-card h3 { font-size: 0.95rem; font-weight: 500; margin-bottom: 3px; }
+    .pricing-card h3 { font-size: 1.15rem; font-weight: 500; margin-bottom: 3px; font-family: var(--sans); }
     .pricing-duration { font-size: 0.82rem; color: var(--fg-muted); font-weight: 300; }
     .pricing-price { font-family: var(--serif); font-size: 2.3rem; font-weight: 400; margin-top: 20px; display: block; }
     .pricing-per { font-size: 0.8rem; color: var(--fg-muted); margin-top: 4px; font-weight: 300; }
-    .pricing-hourly { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px; max-width: 300px; }
     .pricing-notes { margin-top: 28px; display: flex; flex-direction: column; gap: 5px; }
     .pricing-notes p { font-size: 0.84rem; color: var(--fg-muted); font-weight: 300; }
     .payment-info { margin-top: 22px; padding-top: 22px; border-top: 1px solid var(--border); }
-    .payment-logos { display: flex; align-items: center; gap: 20px; }
+    .payment-logos { display: flex; align-items: center; gap: 14px; }
+    .payment-logo-tile { display: flex; align-items: center; justify-content: center; width: 100px; height: 64px; background: #fff; border-radius: 12px; padding: 12px 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04); }
+    .payment-logo-tile img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .payment-logo-tile.wide { width: 100px; padding: 6px 10px; }
 
     #prostor { background: var(--bg); }
     .space-header { margin-bottom: 44px; }
@@ -78,6 +116,16 @@
     .check-icon { width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px; color: var(--accent); }
     .feature-item span { font-size: 0.88rem; color: var(--fg-muted); font-weight: 300; line-height: 1.6; }
 
+    /* Fotogalerie v sekci Prostor */
+    .prostor-gallery { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: auto auto; gap: 12px; margin-top: 52px; }
+    .prostor-gallery img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius); display: block; }
+    .gallery-main { grid-row: 1 / 3; aspect-ratio: 4/3; }
+    .gallery-small { aspect-ratio: 16/10; }
+    @media (max-width: 768px) {
+      .prostor-gallery { grid-template-columns: 1fr; grid-template-rows: auto; }
+      .gallery-main { grid-row: auto; aspect-ratio: 16/10; }
+    }
+
     #lokalita { background: var(--bg-alt); }
     .location-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
     .location-address { margin: 22px 0 28px; }
@@ -85,6 +133,8 @@
     .location-address p { font-size: 0.9rem; color: var(--fg-muted); font-weight: 300; }
     .map-wrap { border-radius: var(--radius); overflow: hidden; aspect-ratio: 16/10; background: var(--border); }
     .map-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
+    /* Na mobilu/tabletu se mapa zobrazí pod tlačítkem */
+    @media (max-width: 1024px) { .location-grid { grid-template-columns: 1fr; gap: 36px; } }
 
     #faq { background: var(--bg); }
     .faq-header { text-align: center; margin-bottom: 52px; }
@@ -108,20 +158,35 @@
     .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
     footer p { font-size: 0.82rem; color: var(--fg-muted); font-weight: 300; }
   </style>
+  <!-- Hotjar tracking -->
+  <script>
+    (function(h,o,t,j,a,r){
+      h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+      h._hjSettings={hjid:6715861,hjsv:6};
+      a=o.getElementsByTagName('head')[0];
+      r=o.createElement('script');r.async=1;
+      r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+      a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+  </script>
 </head>
 <body>
 
 <header>
   <div class="header-inner">
     <a href="#" class="logo">Sdílená terapeutovna.</a>
-    <nav>
+    <nav id="hlavni-nav">
       <a href="#jak-to-funguje">Jak to funguje</a>
       <a href="#cenik">Ceník</a>
       <a href="#prostor">Prostor</a>
       <a href="#lokalita">Lokalita</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <a href="#kontakt" class="btn btn-primary">Mám zájem</a>
+    <a href="#kontakt" class="btn btn-primary header-cta">Mám zájem</a>
+    <!-- Hamburger tlačítko — zobrazí se na mobilu -->
+    <button class="hamburger" id="hamburger" aria-label="Otevřít menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
@@ -145,10 +210,10 @@
       <h2>Jednoduchý postup</h2>
     </div>
     <div class="steps-grid">
-      <div class="step"><span class="step-num">01</span><div><h3>Ozvete se nám</h3><p>Vyplňte krátký kontaktní formulář na webu. Zavoláme si, probereme vaše představy a domluvíme si termín osobní schůzky.</p></div></div>
-      <div class="step"><span class="step-num">02</span><div><h3>Prohlídka terapeutovny</h3><p>Potkáme se přímo v prostoru. Ukážeme vám, jak to u nás vypadá a jaké zázemí budete mít vy i vaši klienti k dispozici.</p></div></div>
-      <div class="step"><span class="step-num">03</span><div><h3>Rezervační systém</h3><p>V kalendáři si vyberete volný termín — krátkou hodinu, půlden i celý den. Vše online a bez čekání.</p></div></div>
-      <div class="step"><span class="step-num">04</span><div><h3>Kredit a okamžitý přístup</h3><p>Po registraci a nahrání kreditu vám systém automaticky vygeneruje unikátní přístupové kódy ke dveřím.</p></div></div>
+      <div class="step"><span class="step-num">01</span><div><h3>Vyplňte formulář</h3><p>Vyplňte krátký kontaktní formulář na webu. Zavoláme si, probereme vaše představy a domluvíme si termín osobní schůzky.</p></div></div>
+      <div class="step"><span class="step-num">02</span><div><h3>Prohlídka terapeutovny</h3><p>Potkáme se přímo v prostoru. Ukážu Vám jak terapeutovna vypadá a jaké zázemí budete mít vy i vaši klienti k dispozici.</p></div></div>
+      <div class="step"><span class="step-num">03</span><div><h3>Kredit a okamžitý přístup</h3><p>Po registraci a nahrání kreditu vám systém automaticky vygeneruje unikátní přístupové kódy ke dveřím.</p></div></div>
+      <div class="step"><span class="step-num">04</span><div><h3>Rezervační systém</h3><p>V kalendáři si vyberete volný termín — krátkou hodinu, půlden i celý den. Vše online a bez čekání.</p></div></div>
     </div>
   </div>
 </section>
@@ -161,32 +226,34 @@
       <p>Otevírací hodiny 7:00–21:00. Vyberte si formát, který vám vyhovuje.</p>
     </div>
     <div class="pricing-grid">
+      <!-- Řádek 1: Celodenní / Hodinový -->
       <div class="pricing-card featured">
-        <h3>Celodenní</h3>
+        <h3>Celodenní blok</h3>
         <p class="pricing-duration">7–21 (14 hod)</p>
         <div class="pricing-badge">nejvýhodnější</div>
         <span class="pricing-price">1 190 Kč</span>
         <p class="pricing-per">(85 Kč / hod.)</p>
       </div>
       <div class="pricing-card">
-        <h3>Dopolední blok – do 15h</h3>
+        <h3>Hodinový blok</h3>
+        <p class="pricing-duration">1,5 hod. (prostor na přípravu a úklid místnosti)</p>
+        <div class="pricing-badge orange">flexibilní</div>
+        <span class="pricing-price">199 Kč</span>
+        <p class="pricing-per">(132,67 Kč / hod.)</p>
+      </div>
+      <!-- Řádek 2: Dopolední / Odpolední -->
+      <div class="pricing-card">
+        <h3>Dopolední blok</h3>
         <p class="pricing-duration">7–15 (8 hod)</p>
         <span class="pricing-price">690 Kč</span>
         <p class="pricing-per">(86,25 Kč / hod.)</p>
       </div>
       <div class="pricing-card">
-        <h3>Odpolední blok – od 15h</h3>
+        <h3>Odpolední blok</h3>
         <p class="pricing-duration">15–21 (6 hod)</p>
         <span class="pricing-price">690 Kč</span>
         <p class="pricing-per">(115 Kč / hod.)</p>
       </div>
-    </div>
-    <div class="pricing-hourly">
-      <h3>Hodinový blok</h3>
-      <p class="pricing-duration">1,5 hod. (prostor na přípravu a úklid místnosti)</p>
-      <div class="pricing-badge orange">flexibilní</div>
-      <span class="pricing-price">199 Kč</span>
-      <p class="pricing-per">(132,67 Kč / hod.)</p>
     </div>
     <div class="pricing-notes">
       <p>V ceně je plně zařízená terapeutovna, včetně kuchyňky, WC a Wi-Fi</p>
@@ -195,8 +262,8 @@
     </div>
     <div class="payment-info">
       <div class="payment-logos">
-        <svg viewBox="0 0 750 471" height="30" xmlns="http://www.w3.org/2000/svg"><path d="M278 334l42-210h67L345 334h-67zm271-204c-13-5-34-11-60-11-66 0-113 33-113 80 0 35 33 54 58 66 26 12 34 20 34 31 0 17-21 24-40 24-26 0-41-4-63-13l-9-4-9 55c16 7 45 13 75 14 70 0 116-33 117-84 0-28-18-49-56-67-23-11-38-18-38-29 0-10 12-20 39-20 22 0 38 5 50 10l6 3 9-55zm165-6h-52c-16 0-28 4-35 20l-100 227h71s12-30 14-37h87c2 9 8 37 8 37h63l-56-247zm-83 160c6-15 28-70 28-70s6-15 9-24l5 22s13 61 16 72h-58zm-450-160l-65 143-7-35c-12-40-49-83-90-104l60 214h72l107-218h-77z" fill="#1A1F71"/><path d="M168 130H57l-1 6c87 21 144 72 168 133l-24-112c-4-16-16-27-32-27z" fill="#F9A51A"/></svg>
-        <svg viewBox="0 0 180 120" height="38" xmlns="http://www.w3.org/2000/svg"><circle cx="65" cy="60" r="40" fill="#EB001B"/><circle cx="115" cy="60" r="40" fill="#F79E1B"/><path d="M90 28.5C97.5 34.5 102.5 43.5 102.5 60s-5 25.5-12.5 31.5C75.5 85.5 77.5 73 77.5 60s-2-25.5 12.5-31.5z" fill="#FF5F00"/><text x="90" y="112" font-family="Arial" font-size="13" font-weight="500" fill="#231F20" text-anchor="middle">mastercard</text></svg>
+        <div class="payment-logo-tile"><img src="images/662f617df2462ac41200cc87.png" alt="Visa"></div>
+        <div class="payment-logo-tile wide"><img src="images/mastercard-logo-pentagram-01.jpg" alt="Mastercard" style="width:100%;height:100%;object-fit:contain;"></div>
       </div>
     </div>
   </div>
@@ -209,12 +276,17 @@
       <h2>Krásná a povedená novostavba</h2>
     </div>
     <div class="features-grid">
-      <div class="feature-item"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span>Klidná novostavba</span></div>
-      <div class="feature-item"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span>Pohodlné křesílka pro klienta i terapeuta</span></div>
-      <div class="feature-item"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span>Dvě terapeutické místnosti — vždy se na vás dostane</span></div>
-      <div class="feature-item"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span>Wi-Fi, čaj, káva i kapesníky v ceně</span></div>
-      <div class="feature-item"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span>Plně vybaveno: pracovní stůl, vybavená kuchyňka, WC</span></div>
-      <div class="feature-item"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span>Bezbariérový vstup, 2× parkování přímo u vchodu</span></div>
+      <div class="feature-item"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span>Krásný nový rezidenční byt 1KK obklopený zelení</span></div>
+      <div class="feature-item"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span>Plně vybavená kuchyňka s kávovarem a WC</span></div>
+      <div class="feature-item"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span>Zázemí pro všechny druhy terapie i s dětmi</span></div>
+      <div class="feature-item"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span>Soukromí, silné WiFi, pracovní stůl a whiteboard</span></div>
+      <div class="feature-item"><svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span>Bezbariérový vstup a parkování přímo u vchodu</span></div>
+    </div>
+    <!-- Fotogalerie prostoru -->
+    <div class="prostor-gallery">
+      <img class="gallery-main" src="images/kamera-22.jpg" alt="Exteriér novostavby — pohled z chodníku">
+      <img class="gallery-small" src="images/kamera-06-1536x1088.jpg" alt="Letecký pohled na areál novostavby">
+      <img class="gallery-small" src="images/byt-c2-8.jpg" alt="Půdorys terapeutické místnosti">
     </div>
   </div>
 </section>
@@ -222,19 +294,19 @@
 <section id="lokalita">
   <div class="container">
     <div class="location-grid">
-      <div>
+      <div class="location-col">
         <p class="section-label">Lokalita</p>
         <h2>V klidné části Ostravy-Hrabůvky</h2>
-        <p style="color:var(--fg-muted);font-size:.9rem;font-weight:300;line-height:1.75">Najdete nás v novostavbě s dobrou dostupností MHD i možností parkování přímo u domu. Centrum Ostravy je vzdálené pár minut tramvají.</p>
+        <p style="color:var(--fg-muted);font-size:.9rem;font-weight:300;line-height:1.75">Sdílenou terapeutovnu najdete v novostavbě s dobrou dostupností MHD i možností parkování přímo u domu. Centrum Ostravy je vzdálené pár minut tramvají.</p>
         <div class="location-address">
           <p>Terapeutovna Ostrava</p>
-          <p>Proskovická 700/30</p>
-          <p>700 30 Ostrava-Hrabůvka</p>
+          <p>Provaznická 700/30</p>
+          <p>700 30 Ostrava-jih-Hrabůvka</p>
         </div>
-        <a href="https://maps.google.com/?q=Proskovická+700/30,+Ostrava-Hrabůvka" target="_blank" class="btn btn-outline">Otevřít v Google Maps</a>
+        <a href="https://maps.app.goo.gl/zSiw3vxqkRZaF9879" target="_blank" class="btn btn-outline">Otevřít v Google Maps</a>
       </div>
       <div class="map-wrap">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2574.9!2d18.2605!3d49.7939!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4711586c3c0cd4ef%3A0x4e3f35e3f5a4b6c7!2sProskovick%C3%A1%20700%2F30%2C%20700%2030%20Ostrava-Hrab%C5%AFvka!5e0!3m2!1scs!2scz!4v1716000000000!5m2!1scs!2scz" allowfullscreen loading="lazy" title="Mapa"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2574.9!2d18.2605!3d49.7939!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4711586c3c0cd4ef%3A0x4e3f35e3f5a4b6c7!2sProvaznick%C3%A1%20700%2F30%2C%20700%2030%20Ostrava-jih-Hrab%C5%AFvka!5e0!3m2!1scs!2scz!4v1716000000000!5m2!1scs!2scz" allowfullscreen loading="lazy" title="Mapa"></iframe>
       </div>
     </div>
   </div>
@@ -247,13 +319,35 @@
       <h2>Časté dotazy</h2>
     </div>
     <div class="faq-list">
-      <div class="faq-item"><button class="faq-q">Kolik stojí prohlídka?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><p class="faq-a">Prohlídka je zcela zdarma a nezávazná. Rádi vám ukážeme prostory a odpovíme na všechny vaše dotazy.</p></div>
-      <div class="faq-item"><button class="faq-q">Pro koho je Terapeutovna určená?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><p class="faq-a">Pro terapeuty, psychology, kouče, poradce a další odborníky, kteří potřebují profesionální a klidný prostor pro práci s klienty.</p></div>
-      <div class="faq-item"><button class="faq-q">Jak zruším svou rezervaci?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><p class="faq-a">Rezervaci můžete zrušit kdykoliv online v kalendáři nebo nám napište email. Při zrušení více než 24 hodin předem neplatíte žádné poplatky.</p></div>
-      <div class="faq-item"><button class="faq-q">Můžu změnit rezervaci?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><p class="faq-a">Ano, rezervaci můžete změnit v kalendáři nebo nám napište. Změny jsou možné v závislosti na dostupnosti termínů.</p></div>
-      <div class="faq-item"><button class="faq-q">Jaká je platnost kreditů?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><p class="faq-a">Kredity jsou platné 6 měsíců od data zakoupení.</p></div>
-      <div class="faq-item"><button class="faq-q">Co je v ceně?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><p class="faq-a">V ceně je plně vybavená terapeutická místnost, Wi-Fi, čaj, káva, voda, kapesníky a přístup do kuchyňky.</p></div>
-      <div class="faq-item"><button class="faq-q">Jak se dostanu dovnitř?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><p class="faq-a">Po rezervaci obdržíte vlastní PIN kód ke dveřím. Vstup je bezbariérový a parkování je přímo u vchodu.</p></div>
+      <!-- Otázky aktualizovány dle podkladů klienta -->
+      <div class="faq-item"><button class="faq-q">Kdo stojí za projektem?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><p class="faq-a">Jsem Mgr. Tereza Kuchtová, frekventant psychoterapeutického výcviku a sociální pedagog. Psychoterapie na „vlastní triko" je nekomfortní pro všechny začínající terapeuty, terapeuty při zaměstnání, ale i lektory a jiné pomáhající profese. Měla jsem možnost využít krásný prostor a začít tvořit. Nabízím tedy sdílenou terapeutovnu a chtěla bych ji tímto způsobem zpřístupnit bez starostí i ostatním.</p></div>
+
+      <div class="faq-item"><button class="faq-q">Jaké jsou největší výhody sdílené terapeutovny?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><p class="faq-a">Sdílený model funguje jednoduše a bez zbytečných závazků:<br><br>
+        <strong>Platíte jen za čas, kdy jste zde opravdu přítomni</strong> — žádné fixní náklady navíc<br>
+        <strong>Nulová počáteční investice</strong> — prostor je plně vybavený a připravený k použití<br>
+        <strong>Souběh se zaměstnáním</strong> — ideální řešení, pokud zatím nepřecházíte do plného úvazku
+      </p></div>
+
+      <div class="faq-item"><button class="faq-q">Jaké bloky si lze zarezervovat?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><p class="faq-a">Dostupné jsou různé balíčky — od krátkých bloků po celodenní pronájem — takže si každý vybere podle svých preferencí i volného času. Minimální jednotka jsou ale vždy <strong>90 minut</strong>. Proč? Aby byl dost prostoru na přípravu místnosti před sezením i na úklid po něm — bez stresu pro vás i pro kolegy, kteří přijdou po vás.</p></div>
+
+      <div class="faq-item"><button class="faq-q">Pro koho je Terapeutovna určená?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><p class="faq-a">Prostor je připravený na široké spektrum práce s klienty:<br><br>
+        <strong>Skupinová sezení a lektorování</strong> — kapacita až 6 osob<br>
+        <strong>Individuální terapie</strong> — klidné a soukromé prostředí<br>
+        <strong>Dětská psychoterapie</strong> — k dispozici pracovní stůl, polohovací židle, dětský koutek i dětská redukce na WC a nočník<br>
+        <strong>Párové terapie</strong> — dostatečný prostor pro pohodlnou práci<br>
+        <strong>Koučink</strong> — profesionální zázemí pro vaše sezení<br><br>
+        Cílem ale není jen nabídnout útulný prostor — jde také o sdružování a propojování komunity profesionálů, kteří mohou na jednom místě rozvíjet sebe i ostatní.
+      </p></div>
+
+      <div class="faq-item"><button class="faq-q">Co když mi v terapeutovně něco chybí?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><p class="faq-a">Pokud v prostoru něco schází nebo je potřeba cokoli specifického, stačí dát vědět. Po domluvě lze většinu věcí zajistit a zázemí přizpůsobit tak, aby co nejlépe vyhovovalo.</p></div>
+
+      <div class="faq-item"><button class="faq-q">Kdy terapeutovna otevírá?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><p class="faq-a">Terapeutovna je aktuálně ve výstavbě. Cílem je stihnout začátek letošních letních prázdnin — přesný termín ale závisí i na tom, kdy developer byt předá. V případě zájmu o přednostní rezervaci stačí napsat a zájemce zařadíme na seznam.</p></div>
+
+      <div class="faq-item"><button class="faq-q">Musím vše řešit osobně?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><p class="faq-a">Vše — rezervace, nahrání kreditu, smlouva i komunikace — lze vyřídit online. Preferuji však osobní schůzku, zvláště na úvod. Prostory je možné si prohlédnout a na místě se zodpovím na všechny otázky.</p></div>
+
+      <div class="faq-item"><button class="faq-q">Jak se dostanu do terapeutovny?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><p class="faq-a">Poté, co máte zarezervovaný čas, funguje i váš přidělený PIN ke vchodovým dveřím. Do prostoru tak vstoupíte samostatně a bez čekání. Svého klienta pak vyzvednete u vchodu, až dorazí.</p></div>
+
+      <div class="faq-item"><button class="faq-q">Je u terapeutovny parkování?<svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button><p class="faq-a">Ano. Terapeutovna disponuje jedním parkovacím místem přímo u vchodu — můžete ho využít pro sebe nebo ho přenechat klientovi. Další parkování je dostupné na přilehlé silnici u rezidence.</p></div>
     </div>
   </div>
 </section>
@@ -261,29 +355,46 @@
 <section id="kontakt">
   <div class="container">
     <p class="section-label">Kontakt</p>
-    <h2>Máte zájem o prohlídku?</h2>
-    <p class="contact-desc">Napište nebo zavolejte. Domluvíme termín, kdy se potkáme přímo v Terapeutovně a projdeme si prostory.</p>
+    <h2>Máte zájem?</h2>
+    <p class="contact-desc">Vyplňte krátký kontaktní formulář.<br>Následně si zavoláme, probereme vaše představy a domluvíme si termín osobní schůzky přímo v Terapeutovně.</p>
     <div class="contact-btns">
-      <a href="mailto:info@terapeutovna-ostrava.cz" class="btn btn-light">info@terapeutovna-ostrava.cz</a>
-      <a href="tel:+420123456789" class="btn btn-ghost-light">Zavolat</a>
+      <a href="https://forms.gle/Dj2Q3uc7NVqvp2RaA" target="_blank" class="btn btn-light">Vyplnit formulář</a>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="footer-inner">
-    <p>© 2024 Terapeutovna Ostrava</p>
-    <p>Proskovická 700/30, Ostrava-Hrabůvka</p>
+    <p>© 2026 Sdílená Terapeutovna Ostrava</p>
+    <p>Proudly vibecoded</p>
   </div>
 </footer>
 
 <script>
+  // FAQ accordion
   document.querySelectorAll('.faq-q').forEach(btn => {
     btn.addEventListener('click', () => {
       const item = btn.parentElement;
       const wasOpen = item.classList.contains('open');
       document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
       if (!wasOpen) item.classList.add('open');
+    });
+  });
+
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const nav = document.getElementById('hlavni-nav');
+  hamburger.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', isOpen);
+  });
+  // Zavřít menu po kliknutí na odkaz
+  nav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      nav.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', false);
     });
   });
 </script>
