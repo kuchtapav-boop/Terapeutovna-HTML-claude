@@ -50,6 +50,11 @@
     .hamburger.open span:nth-child(2) { opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
+    /* Hero — na mobilu nižší výška, aby byla viditelná další sekce */
+    @media (max-width: 768px) {
+      #hero { height: auto; min-height: 70vh; }
+    }
+
     /* Mobilní navigace */
     @media (max-width: 768px) {
       .hamburger { display: flex; }
