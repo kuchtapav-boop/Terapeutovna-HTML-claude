@@ -3,7 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Terapeutovna Ostrava</title>
+  <title>Sdílená terapeutovna Ostrava – Pronájem terapeutické místnosti v Hrabůvce</title>
+  <meta name="description" content="Pronájem útulné terapeutické místnosti v Ostravě-Hrabůvce. Plně vybavený prostor pro psychoterapeuty, koučky i lektory. Od 199 Kč/blok. Bezbariérový přístup, parkování, Wi-Fi." />
+  <meta name="keywords" content="terapeutovna Ostrava, pronájem terapeutické místnosti, sdílená terapeutovna, psychoterapeut Ostrava, koučink Ostrava, Hrabůvka" />
+  <link rel="canonical" href="https://terapeutovna-ostrava.cz/" />
+
+  <!-- Open Graph — sdílení na sociálních sítích -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://terapeutovna-ostrava.cz/" />
+  <meta property="og:title" content="Sdílená terapeutovna Ostrava – Pronájem terapeutické místnosti" />
+  <meta property="og:description" content="Útulný prostor pro psychoterapeuty, koučky a lektory v Ostravě-Hrabůvce. Plně vybavená místnost od 199 Kč/blok." />
+  <meta property="og:image" content="https://terapeutovna-ostrava.cz/images/hero.png" />
+  <meta property="og:locale" content="cs_CZ" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Sdílená terapeutovna Ostrava" />
+  <meta name="twitter:description" content="Pronájem terapeutické místnosti v Ostravě-Hrabůvce od 199 Kč/blok." />
+  <meta name="twitter:image" content="https://terapeutovna-ostrava.cz/images/hero.png" />
+
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
   <style>
@@ -46,7 +64,7 @@
       nav.open { display: flex; }
       nav a { padding: 14px 24px; font-size: 1rem; border-bottom: 1px solid var(--border); }
       nav a:last-child { border-bottom: none; }
-      .header-cta { display: none; }
+      .header-cta { display: none !important; }
       section { padding: 56px 20px; }
       .steps-grid { grid-template-columns: 1fr !important; gap: 32px; }
       .pricing-grid { grid-template-columns: 1fr; }
@@ -158,6 +176,39 @@
     .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
     footer p { font-size: 0.82rem; color: var(--fg-muted); font-weight: 300; }
   </style>
+  <!-- Strukturovaná data — LocalBusiness schema pro Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Sdílená terapeutovna Ostrava",
+    "description": "Sdílená terapeutická místnost pro psychoterapeuty, koučky a lektory v Ostravě-Hrabůvce. Plně vybavený prostor s bezbariérovým přístupem a parkováním.",
+    "url": "https://terapeutovna-ostrava.cz/",
+    "image": "https://terapeutovna-ostrava.cz/images/hero.png",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Provaznická 700/30",
+      "addressLocality": "Ostrava",
+      "addressRegion": "Moravskoslezský kraj",
+      "postalCode": "700 30",
+      "addressCountry": "CZ"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 49.7939,
+      "longitude": 18.2605
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+      "opens": "07:00",
+      "closes": "21:00"
+    },
+    "priceRange": "199–1190 Kč",
+    "areaServed": "Ostrava"
+  }
+  </script>
+
   <!-- Hotjar tracking -->
   <script>
     (function(h,o,t,j,a,r){
@@ -181,6 +232,7 @@
       <a href="#prostor">Prostor</a>
       <a href="#lokalita">Lokalita</a>
       <a href="#faq">FAQ</a>
+      <a href="#kontakt">Kontakt</a>
     </nav>
     <a href="#kontakt" class="btn btn-primary header-cta">Mám zájem</a>
     <!-- Hamburger tlačítko — zobrazí se na mobilu -->
