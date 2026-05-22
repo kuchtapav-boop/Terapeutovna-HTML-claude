@@ -195,10 +195,20 @@
       align-items: center;
       gap: 12px;
     }
+    /* Odkaz v kroku 1 */
+    .step-link {
+      color: inherit;
+      text-decoration: underline;
+      text-decoration-color: var(--accent);
+      text-underline-offset: 3px;
+      transition: color .2s;
+    }
+    .step-link:hover { color: var(--accent); }
+
     .founder-photo {
       width: 120px;
       height: 120px;
-      border-radius: 50%;
+      border-radius: var(--radius);
       object-fit: cover;
       object-position: center top;
       border: 3px solid rgba(250,247,243,0.2);
@@ -355,7 +365,7 @@
       <h2>Jednoduchý postup</h2>
     </div>
     <div class="steps-grid">
-      <div class="step"><span class="step-num">01</span><div><h3>Vyplňte formulář</h3><p>Vyplňte krátký kontaktní formulář na webu. Zavoláme si, probereme vaše představy a domluvíme si termín osobní schůzky.</p></div></div>
+      <div class="step"><span class="step-num">01</span><div><h3><a href="#kontakt" class="step-link">Vyplňte formulář</a></h3><p>Vyplňte krátký kontaktní formulář na webu. Zavoláme si, probereme vaše představy a domluvíme si termín osobní schůzky.</p></div></div>
       <div class="step"><span class="step-num">02</span><div><h3>Prohlídka terapeutovny</h3><p>Potkáme se přímo v prostoru. Ukážu Vám jak terapeutovna vypadá a jaké zázemí budete mít vy i vaši klienti k dispozici.</p></div></div>
       <div class="step"><span class="step-num">03</span><div><h3>Kredit a okamžitý přístup</h3><p>Po registraci a nahrání kreditu vám systém automaticky vygeneruje unikátní přístupové kódy ke dveřím.</p></div></div>
       <div class="step"><span class="step-num">04</span><div><h3>Rezervační systém</h3><p>V kalendáři si vyberete volný termín — krátkou hodinu, půlden i celý den. Vše online a bez čekání.</p></div></div>
